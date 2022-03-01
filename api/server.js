@@ -1,8 +1,10 @@
 const express = require('express');
 const server = express();
 
+const usersRouter = require('./users/users-router');
+
 server.use(express.json());
-// insert API Routers
+server.use('/api/users', usersRouter);
 
 server.use((err, req, res, next) => {
   res.status(500).json({
