@@ -2,6 +2,7 @@ const Users = require('./users-model');
 
 const logger = (req, res, next) => {
   console.log(`${new Date().toISOString()} : [${req.method}] at ${req.url}`);
+  next();
 };
 
 const validatePost = (req, res, next) => {
