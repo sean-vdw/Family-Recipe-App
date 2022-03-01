@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const Users = require('./users-model');
+const { logger, validatePost } = require('./users-middleware');
 
 // [GET] all users
-router.get('/', (req, res, next) => {
+router.get('/', logger, (req, res, next) => {
   Users.getUsers()
     .then(users => {
       res.json(users);
@@ -11,7 +12,7 @@ router.get('/', (req, res, next) => {
 });
 
 // [POST] new user
-router.post('/', (req, res, next) => {
+router.post('/', validatePost, (req, res, next) => {
   const newUser = req.body;
   Users.createUser(newUser)
     .then(user => {
