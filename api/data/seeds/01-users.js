@@ -2,7 +2,9 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> } 
  */
-const users = [{ }];
+const users = [
+  { username: 'testname', password: 'testing123' },
+];
 
 exports.users = users;
 
