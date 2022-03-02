@@ -2,6 +2,7 @@ const express = require('express');
 const server = express();
 const cors = require('cors');
 const path = require('path');
+const bodyParser = require('body-parser');
 
 const usersRouter = require('./users/users-router');
 const authRouter = require('./auth/auth-router');
