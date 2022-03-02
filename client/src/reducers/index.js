@@ -1,4 +1,4 @@
-import { FETCH_START, FETCH_SUCCESS, FETCH_FAIL, ADD_USER } from '../actions';
+import { ADD_USER_START, ADD_USER_SUCCESS, ADD_USER_FAIL } from '../actions';
 
 export const initialState = {
   username: '',
@@ -9,29 +9,24 @@ export const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch(action.type) {
-    case FETCH_START:
+    case ADD_USER_START:
       return {
         ...state,
         isLoading: true
       }
-    case FETCH_SUCCESS:
+    case ADD_USER_SUCCESS:
       return {
         ...state,
         isLoading: false,
         username: action.payload,
-        password: action.payload
+        password: action.payload,
+        error: ''
       }
-    case FETCH_FAIL:
+    case ADD_USER_FAIL:
       return {
         ...state,
         isLoading: false,
         error: action.payload
-      }
-    case ADD_USER:
-      return {
-        ...state,
-        username: action.payload,
-        password: action.payload
       }
     default:
       return state

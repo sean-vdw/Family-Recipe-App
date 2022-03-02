@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
-import { fetchFail, addUser } from '../actions';
+import { addUser } from '../actions';
 
 import { LockClosedIcon } from '@heroicons/react/solid';
 
-export default function RegisterForm({ error, dispatch }) {
+function RegisterForm({ error, dispatch }) {
   const [state, setState] = useState({
     username: '',
     password: '',
@@ -20,10 +20,8 @@ export default function RegisterForm({ error, dispatch }) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (state.username.trim() === '' || state.password === '' || state.confirmPassword === '') {
-      dispatch(fetchFail('Username, Password, and Password Confirmation are required.'));
-    } else if (state.password !== state.confirmPassword) {
-      dispatch(fetchFail('Passwords must match'));
+    if (state.password !== state.confirmPassword) {
+      alert('Passwords must match');
     } else {
       dispatch(addUser({
         username: state.username,
@@ -120,3 +118,13 @@ export default function RegisterForm({ error, dispatch }) {
     </div>
   )
 }
+
+const mapStateToProps = state => {
+  return {
+    username: state.username,
+    password: state.password,
+    error: state.error
+  };
+};
+
+export default connect(mapStateToProps)(RegisterForm);
