@@ -9,7 +9,7 @@ const restricted = require('./middleware/restricted');
 server.use(express.json());
 server.use(cors());
 
-server.use('/api/users', restricted, usersRouter);
+server.use('/api/users', usersRouter);
 server.use('/api/auth', authRouter);
 
 server.use((err, req, res, next) => {
