@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
 import { addUser } from '../actions';
+import { useHistory } from 'react-router-dom';
 
 import { LockClosedIcon } from '@heroicons/react/solid';
 
 function RegisterForm({ error, dispatch }) {
+  const history = useHistory();
   const [state, setState] = useState({
     username: '',
     password: '',
@@ -27,6 +29,7 @@ function RegisterForm({ error, dispatch }) {
         username: state.username,
         password: state.password
       }));
+      history.push('/login');
     };
   };
 
