@@ -13,8 +13,8 @@ router.get('/', logger, (req, res, next) => {
 
 // [POST] new user
 router.post('/', logger, validatePost, (req, res, next) => {
-  const newUser = req.body;
-  Users.createUser(newUser)
+  const { username, password } = req.body;
+  Users.createUser({ username, password })
     .then(user => {
       res.status(201).json(user);
     })

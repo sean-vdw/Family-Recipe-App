@@ -1,6 +1,37 @@
-import { LockClosedIcon } from '@heroicons/react/solid'
+import { useState } from 'react';
+import { connect } from 'react-redux';
+import { fetchFail, addUser } from '../actions';
 
-export default function RegisterForm() {
+import { LockClosedIcon } from '@heroicons/react/solid';
+
+export default function RegisterForm({ error, dispatch }) {
+  const [state, setState] = useState({
+    username: '',
+    password: '',
+    confirmPassword: ''
+  });
+
+  const handleChange = e => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    if (state.username.trim() === '' || state.password === '' || state.confirmPassword === '') {
+      dispatch(fetchFail('Username, Password, and Password Confirmation are required.'));
+    } else if (state.password !== state.confirmPassword) {
+      dispatch(fetchFail('Passwords must match'));
+    } else {
+      dispatch(addUser({
+        username: state.username,
+        password: state.password
+      }));
+    };
+  };
+
   return (
     <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
@@ -12,7 +43,7 @@ export default function RegisterForm() {
           />
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign Up</h2>
         </div>
-        <form className="mt-8 space-y-6" action="#" method="POST">
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
@@ -23,6 +54,7 @@ export default function RegisterForm() {
                 id="username"
                 name="username"
                 type="text"
+                onChange={handleChange}
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 focus:z-10 sm:text-sm"
                 placeholder="Username"
@@ -36,6 +68,7 @@ export default function RegisterForm() {
                 id="password"
                 name="password"
                 type="password"
+                onChange={handleChange}
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 focus:z-10 sm:text-sm"
                 placeholder="Password"
@@ -47,8 +80,9 @@ export default function RegisterForm() {
               </label>
               <input
                 id="confirm-password"
-                name="confirm-password"
+                name="confirmPassword"
                 type="password"
+                onChange={handleChange}
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 focus:z-10 sm:text-sm"
                 placeholder="Confirm Password"
