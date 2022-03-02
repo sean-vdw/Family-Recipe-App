@@ -15,7 +15,7 @@ server.use('/api/users', usersRouter);
 server.use('/api/auth', authRouter);
 
 server.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client', 'index.html'));
+  res.sendFile(path.join(__dirname, '../client/public', 'index.html'));
 });
 
 server.use((err, req, res, next) => {
