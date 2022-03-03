@@ -8,7 +8,7 @@ const usersRouter = require('./users/users-router');
 const authRouter = require('./auth/auth-router');
 const restricted = require('./middleware/restricted');
 
-server.use(express.static(path.join(__dirname, '../client/public')));
+server.use(express.static(path.join(__dirname, '../client')));
 server.use(express.json());
 server.use(cors());
 
