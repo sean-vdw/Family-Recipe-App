@@ -13,7 +13,7 @@
     "seed:prod": "heroku run knex seed:run -a fam-recipes-app",
     "test": "jest",
     "deploy": "git push heroku main",
-    "heroku-postbuild": "cd client && npm install && npm run build && npm run start"
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "engines": {
     "node": "14.17.6",
