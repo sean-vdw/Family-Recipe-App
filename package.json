@@ -12,7 +12,8 @@
     "database:prod": "heroku pg:psql -a fam-recipes-app",
     "seed:prod": "heroku run knex seed:run -a fam-recipes-app",
     "test": "jest",
-    "deploy": "git push heroku main"
+    "deploy": "git push heroku main",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "engines": {
     "node": "14.17.6",
